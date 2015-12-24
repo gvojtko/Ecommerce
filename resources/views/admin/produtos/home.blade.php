@@ -66,7 +66,7 @@
 				                    </thead>
 				                    <tbody>
 					                    @foreach($produtos as $produto)
-						                    <tr role="row" class="odd {{$produto->quantidade<=1 ? 'danger' : '' }}">
+						                    <tr role="row" class="odd {{$produto->quantidade<=5 ? 'danger' : '' }}">
 							                     <td class="sorting_1">{{$produto->id}}</td>
 							                     <td>{{$produto->nome}}</td>
 							                     <td>{{ number_format($produto->valor, 2) }}</td>
@@ -92,7 +92,7 @@
 	                    			</tfoot>
 	                  			</table>
 	                  			<span class="label label-danger pull-right">
-									Um ou menos itens no estoque
+									<i class="fa fa-warning"></i> 5 ou menos itens em estoque
 								</span>
 	                  		@else
 	                  			<div class="callout callout-danger">

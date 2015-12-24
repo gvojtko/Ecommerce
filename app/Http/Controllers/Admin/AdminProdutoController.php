@@ -9,6 +9,8 @@ use estoque\Http\Controllers\Controller;
 use Input, Validator, Auth, Redirect;
 use estoque\Http\Requests\AdminProdutoRequest;
 
+use estoque\Models\Admin\AdmProduct as AdmProduct;
+
 
 class AdminProdutoController extends Controller
 {   
@@ -31,11 +33,11 @@ class AdminProdutoController extends Controller
 
             if ($request->input('filtro_nome')) 
             {
-                $produtos = \estoque\Produto::orderBy('id', 'DESC')->where('nome', 'like', '%'.$request->input('filtro_nome').'%')
+                $produtos = AdmProduct::orderBy('id', 'DESC')->where('nome', 'like', '%'.$request->input('filtro_nome').'%')
                                             ->paginate($perPage);                
             }else{
-                //dd(Auth::User()->name);
-                $produtos = \estoque\Produto::orderBy('id', 'DESC')->paginate($perPage);                
+
+                $produtos = AdmProduct::orderBy('id', 'DESC')->paginate($perPage);                
             }
 
             return view('admin.produtos.home')->with('produtos', $produtos);
@@ -53,7 +55,7 @@ class AdminProdutoController extends Controller
      */
     public function create()
     {
-        return view('admin.produtos.form');
+        return view('admin.produtos.create');
     }
 
     /**
@@ -70,7 +72,7 @@ class AdminProdutoController extends Controller
             {   
 
                 $params = $request->all();
-                $produto = new \estoque\Produto($params);
+                $produto = new AdmProduct($params);
                 if($produto->save())
                 {
                     $request->session()->flash('alert-success', 'Produto cadastrado com sucesso!');
@@ -82,7 +84,7 @@ class AdminProdutoController extends Controller
                 }
             }
         } catch (Exception $e) {
-            
+            echo $e->getMessage();
         }
     }
 
@@ -96,7 +98,7 @@ class AdminProdutoController extends Controller
     {   
        
         try {
-            $produto = \estoque\Produto::find($id);
+            $produto = AdmProduct::find($id);
 
             if(!$produto OR empty($produto))
             {
@@ -121,8 +123,8 @@ class AdminProdutoController extends Controller
      */
     public function edit($id)
     {       
-        $produto = \estoque\Produto::find($id);
-        return view('admin.produtos.form')->with('produto', $produto);
+        $produto = AdmProduct::find($id);
+        return view('admin.produtos.edit')->with('produto', $produto);
     }
 
     /**
@@ -134,7 +136,10 @@ class AdminProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produto = AdmProduct::find($id);
+        $produto->save();
+        $request->session()->flash('alert-success', 'Produto editado com sucesso!');
+        return redirect('/admin/produtos/');
     }
 
     /**
@@ -145,7 +150,7 @@ class AdminProdutoController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $produto = \estoque\Produto::find($id);
+        $produto = AdmProduct::find($id);
 
         if ($produto->delete())
         {

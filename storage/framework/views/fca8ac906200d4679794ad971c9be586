@@ -1,53 +1,27 @@
-<?php $__env->startSection('content'); ?>
 
-
-	<div class="box">
-		<div class="box-header with-border">
-			<h3 class="box-title"><i class="fa fa-plus"></i> Cadastrar novo Produto</h3>
-		</div>
-		<div class="box-body">
-			<form action="<?php echo e(asset('admin/produtos/adicionar')); ?>" method="post">
-				<!--<input type="hidden" name="_method" value="POST">-->
 				<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
 				<input type="hidden" name="id" value="<?php echo e(isset($produto->id) ? $produto->id : ''); ?>"> 
 				<div class="form-group">
-					<input  value="<?php echo e(isset($produto->nome) ? $produto->nome : old('nome')); ?>" name ="nome" class="form-control input-lg" type="text" placeholder="Nome">
+					<label for="name_product">
+						Nome do produto:
+					</label>
+					<input  value="<?php echo e(isset($produto->name_product) ? $produto->name_product : old('name_product')); ?>" name ="name_product" class="form-control input-lg" type="text" placeholder="Nome">
 				</div>
 				<div class="form-group">
+
 					<input value="<?php echo e(isset($produto->valor) ? $produto->valor : old('valor')); ?>"  name="valor" class="form-control input-lg" type="number" placeholder="Valor">
 				</div>
 				<div class="form-group">
 					<input value="<?php echo e(isset($produto->quantidade) ? $produto->quantidade : old('quantidade')); ?>"  name="quantidade" class="form-control input-lg" type="number" placeholder="Quantidade">			
 				</div>
-				
-				<textarea name="descricao"  class="textarea" placeholder="Descrição do produto..." style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo e(isset($produto->descricao) ? $produto->descricao : old('descricao')); ?></textarea>
+				<label for="cart_description"></label>
+				<textarea name="cart_description"  class="textarea" placeholder="Descrição do carrino (Resumo)..." style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo e(isset($produto->descricao) ? $produto->descricao : old('descricao')); ?></textarea>
+
+				<textarea name="description"  class="textarea" placeholder="Descrição do produto..." style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo e(isset($produto->descricao) ? $produto->descricao : old('descricao')); ?></textarea>
 	            
 				<div class="form-group">
 					<input type="submit" value="Cadastrar" class="btn btn-flat btn-success">
 					<button type="buttom" name="" class="btn btn-warning btn-lg pull-right" onclick="window.history.back();">Voltar</button>
 				</div>
 
-			</form>
-		</div><!-- /.box-body -->
-	</div>
-
-<?php $__env->stopSection(); ?>
-
-
-<?php $__env->startSection('styles'); ?>
-	<link rel="stylesheet" href="<?php echo asset("/admin/tema/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"); ?>">
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('scripts'); ?>
-	<script src="<?php echo asset("/admin/tema/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"); ?>"></script>
-    <script>
-      $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        //CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-      });
-    </script>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin.default_admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		

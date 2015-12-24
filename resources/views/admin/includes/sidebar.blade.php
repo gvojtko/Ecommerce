@@ -11,8 +11,9 @@
             </div>
             <div class="pull-left info">
                 <p>{{Auth::user()->name}}</p>
-                <!-- Status -->
+                <!-- Status 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                -->
             </div>
         </div>
 
@@ -29,17 +30,63 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            <li class="header">Titulo</li>
+            <li class="header">Módulos</li>
             <!-- Optionally, you can add icons to the links -->
-           <!-- <li class="active"><a href="#"><span>Link</span></a></li>
-           <li><a href="#"><span>Another Link</span></a></li>-->
+           <li class="{{ Request::is('admin/painel') ? 'active' : '' }}"><a href="{{ asset('admin/painel') }}"><i class="fa  fa-tachometer"></i> <span>Inicio</span></a></li>
+         
+            <li class="treeview">
+                <a href="#" >
+                    <i class="fa  fa-shopping-cart"></i>
+                    <span>E-commerce</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i>
+                            <span>Produtos</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ url('/admin/produtos/') }}"><i class="fa fa-circle-o"></i> Listar todos</a></li>
+                            <li><a href="{{ url('/admin/produtos/novo/') }}"><i class="fa fa-circle-o"></i> Novo Produto</a></li>
+                       </ul>
+                   </li>     
+                   <li>
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Relatórios</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ url('') }}"><i class="fa fa-circle-o"></i> Listar todos</a></li>
+                        </ul>
+                   </li>
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="#">
-                <i class="fa fa-th"></i>
-                <span>Produtos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <i class="fa   fa-book"></i>
+                    <span>Conteúdo</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ asset('/admin/produtos/') }}">Listar todos</a></li>
-                    <li><a href="{{ asset('/admin/produtos/novo/') }}">Novo Produto</a></li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <span>Categorias</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ url('') }}"><i class="fa fa-circle-o"></i> Nova</a></li>
+                            <li></i><a href="{{ url('') }}"><i class="fa fa-circle-o"></i> Listar</a></li>
+                       </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-image"></i>
+                    <span>Banners</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li></i><a href="{{ url('') }}"><i class="fa fa-circle-o"></i> Listar</a></li>
+                    <li><a href="{{ url('') }}"><i class="fa fa-circle-o"></i> Novo</a></li>               
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

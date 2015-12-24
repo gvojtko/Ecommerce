@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use estoque\Http\Requests;
 use estoque\Http\Controllers\Controller;
 
+use \estoque\Models\Admin\AdmProduct as AdmProduct;
+//use \estoque\Models\Admin\AdmCategory as AdmCategory;
+
 class AdminHomeController extends Controller
 {
     public function __construct()
@@ -19,8 +22,11 @@ class AdminHomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('admin.home.home');
+    {   
+       // dd (AdmProduct::all());
+        $ultimosProdutos = AdmProduct::orderBy('id', 'DESC')->limit(10)->groupBy('name_product')->get();
+
+        return view('admin.home.home')->with('produtos', $ultimosProdutos);
     }
 
     /**

@@ -31,8 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->string('permission');
             $table->boolean('is_active');
-            $table->string('remember_token', 100)->nullable();
-            $table->boolean('receiveMailing');
+            $table->boolean('receive_mailing');
             $table->rememberToken();
             $table->timestamps();
         });

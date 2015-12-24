@@ -1,13 +1,14 @@
 <?php
 
-namespace estoque;
+namespace estoque\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 use Input, Validator, Auth, Redirect;
+use \estoque\Models\Admin\AdmCategory as AdmCategory;
 
-class Produto extends Model
+class AdmProduto extends Model
 {
-	protected $table = 'produtos';	
+    protected $table = 'produtos';	
 	protected $fillable = ['nome', 'descricao', 'valor', 'quantidade'];
 	protected $guarded = ['id'];
 
@@ -19,4 +20,5 @@ class Produto extends Model
 
         return Validator::make($input,$rules);
     }
+
 }
